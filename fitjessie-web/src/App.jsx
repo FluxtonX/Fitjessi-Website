@@ -93,9 +93,13 @@ function App() {
   const [password, setPassword] = useState('');
   const [selectedPlan, setSelectedPlan] = useState('semi-annually');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoginMode, setIsLoginMode] = useState(false);
 
-  const handleCreateAccount = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    if (isLoginMode && !fullName) {
+      setFullName('USER');
+    }
     setIsLoggedIn(true);
   };
 
@@ -284,19 +288,29 @@ function App() {
               </div>
             </div>
             <p className="plan-cta-text">
-              Enter your details here to sign up.<br />
-              Already have an account? <a href="#" className="link-underline">Log in</a>
+              {isLoginMode ? (
+                <>
+                  Don't have an account? <a href="#" className="link-underline" onClick={(e) => { e.preventDefault(); setIsLoginMode(false); }}>Sign up</a>
+                </>
+              ) : (
+                <>
+                  Enter your details here to sign up.<br />
+                  Already have an account? <a href="#" className="link-underline" onClick={(e) => { e.preventDefault(); setIsLoginMode(true); }}>Log in</a>
+                </>
+              )}
             </p>
 
-            {/* Sign Up Form */}
-            <form className="signup-form" onSubmit={handleCreateAccount}>
-              <input
-                id="fullname-input"
-                type="text"
-                placeholder="Full name"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-              />
+            {/* Form */}
+            <form className="signup-form" onSubmit={handleSubmit}>
+              {!isLoginMode && (
+                <input
+                  id="fullname-input"
+                  type="text"
+                  placeholder="Full name"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                />
+              )}
               <input
                 id="email-input"
                 type="email"
@@ -311,13 +325,24 @@ function App() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <p className="form-hint">The password must be at least 6 characters</p>
-              <button id="create-account-btn" type="submit" className="btn-primary">
-                CREATE ACCOUNT
+              
+              {isLoginMode ? (
+                <div style={{textAlign: 'right', marginBottom: '24px', marginTop: '-8px'}}>
+                  <a href="#" style={{fontSize: '14px', fontWeight: '500', color: '#3d2c2e', textDecoration: 'none'}}>Forgot password?</a>
+                </div>
+              ) : (
+                <p className="form-hint">The password must be at least 6 characters</p>
+              )}
+
+              <button type="submit" className="btn-primary" style={{backgroundColor: isLoginMode ? '#1e1e24' : '', color: isLoginMode ? '#fff' : ''}}>
+                {isLoginMode ? 'LOG IN' : 'CREATE ACCOUNT'}
               </button>
-              <p className="form-terms">
-                By signing up you agree to our <a href="#" className="link-underline">Terms & conditions</a>.
-              </p>
+              
+              {!isLoginMode && (
+                <p className="form-terms">
+                  By signing up you agree to our <a href="#" className="link-underline">Terms & conditions</a>.
+                </p>
+              )}
             </form>
           </div>
 
