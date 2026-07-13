@@ -94,6 +94,14 @@ function App() {
   const [selectedPlan, setSelectedPlan] = useState('semi-annually');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoginMode, setIsLoginMode] = useState(false);
+  const [checkoutPlan, setCheckoutPlan] = useState(null);
+
+  const planDetails = {
+    'monthly': { label: 'MONTHLY', price: '$29.99', per: '/MONTH', small: 'USD', detail: '$29.99 usd\nbilled monthly' },
+    'semi-annually': { label: 'SEMI-ANNUALLY', price: '$16.67', per: '/MONTH', small: 'USD', detail: <><s style={{color:'#a08b8c'}}>$179.94 usd</s> $99.99 usd<br/>billed semi-annually</>, badge: 'MOST POPULAR', badgeHighlight: '45% OFF' },
+    'annually': { label: 'ANNUALLY', price: '$12.50', per: '/MONTH', small: 'USD', detail: <><s style={{color:'#a08b8c'}}>$359.88 usd</s> $149.99 usd<br/>billed annually</>, badge: 'BEST VALUE', badgeHighlight: '58% OFF' },
+    'lifetime': { label: 'LIFETIME', price: '$299.99', per: 'USD', small: '', detail: '$299.99 usd\nbilled once' }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -106,7 +114,7 @@ function App() {
   const renderPricingCards = () => (
     <div className="pricing-cards">
       <label className={`pricing-card ${selectedPlan === 'monthly' ? 'selected' : ''}`} htmlFor="plan-monthly">
-        <input type="radio" id="plan-monthly" name="plan" value="monthly" checked={selectedPlan === 'monthly'} onChange={() => setSelectedPlan('monthly')} />
+        <input type="radio" id="plan-monthly" name="plan" value="monthly" checked={selectedPlan === 'monthly'} onChange={() => { setSelectedPlan('monthly'); if (isLoggedIn) setCheckoutPlan('monthly'); }} />
         <div className="pricing-card-inner">
           <div className="pricing-left">
             <span className="pricing-label">MONTHLY</span>
@@ -122,7 +130,7 @@ function App() {
       </label>
 
       <label className={`pricing-card highlighted ${selectedPlan === 'semi-annually' ? 'selected' : ''}`} htmlFor="plan-semi">
-        <input type="radio" id="plan-semi" name="plan" value="semi-annually" checked={selectedPlan === 'semi-annually'} onChange={() => setSelectedPlan('semi-annually')} />
+        <input type="radio" id="plan-semi" name="plan" value="semi-annually" checked={selectedPlan === 'semi-annually'} onChange={() => { setSelectedPlan('semi-annually'); if (isLoggedIn) setCheckoutPlan('semi-annually'); }} />
         <div className="pricing-card-inner">
           <div className="pricing-left">
             <span className="pricing-label">SEMI-ANNUALLY</span>
@@ -139,7 +147,7 @@ function App() {
       </label>
 
       <label className={`pricing-card ${selectedPlan === 'annually' ? 'selected' : ''}`} htmlFor="plan-annual">
-        <input type="radio" id="plan-annual" name="plan" value="annually" checked={selectedPlan === 'annually'} onChange={() => setSelectedPlan('annually')} />
+        <input type="radio" id="plan-annual" name="plan" value="annually" checked={selectedPlan === 'annually'} onChange={() => { setSelectedPlan('annually'); if (isLoggedIn) setCheckoutPlan('annually'); }} />
         <div className="pricing-card-inner">
           <div className="pricing-left">
             <span className="pricing-label">ANNUALLY</span>
@@ -156,7 +164,7 @@ function App() {
       </label>
 
       <label className={`pricing-card ${selectedPlan === 'lifetime' ? 'selected' : ''}`} htmlFor="plan-lifetime">
-        <input type="radio" id="plan-lifetime" name="plan" value="lifetime" checked={selectedPlan === 'lifetime'} onChange={() => setSelectedPlan('lifetime')} />
+        <input type="radio" id="plan-lifetime" name="plan" value="lifetime" checked={selectedPlan === 'lifetime'} onChange={() => { setSelectedPlan('lifetime'); if (isLoggedIn) setCheckoutPlan('lifetime'); }} />
         <div className="pricing-card-inner">
           <div className="pricing-left">
             <span className="pricing-label">LIFETIME</span>
@@ -202,10 +210,69 @@ function App() {
             </p>
 
             <div className="dashboard-pricing-container">
-              {renderPricingCards()}
+              {checkoutPlan ? (
+                <div className="checkout-view">
+                  <div className="checkout-top-bar">
+                    <div className="checkout-selected-card">
+                      <div className="pricing-card-inner">
+                        <div className="pricing-left">
+                          <span className="pricing-label" style={{color: '#d66a45'}}>{planDetails[checkoutPlan].label}</span>
+                          <div className="pricing-amount">
+                            <span className="price">{planDetails[checkoutPlan].price}</span>
+                            {planDetails[checkoutPlan].small ? (
+                              <span className="per">{planDetails[checkoutPlan].per}<br /><small>{planDetails[checkoutPlan].small}</small></span>
+                            ) : (
+                              <span className="per-inline">{planDetails[checkoutPlan].per}</span>
+                            )}
+                          </div>
+                        </div>
+                        <div className="pricing-right" style={{textAlign: 'right'}}>
+                          <span className="pricing-detail">{planDetails[checkoutPlan].detail}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <button className="checkout-close" onClick={() => setCheckoutPlan(null)}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <p className="checkout-subtitle">Pay with <strong style={{textDecoration: 'underline'}}>credit card</strong></p>
+
+                  <div className="checkout-fields">
+                    <div className="checkout-field field-card">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a08b8c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="field-icon"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                      <input type="text" placeholder="Card number" />
+                      <button className="autofill-btn">Autofill <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></button>
+                    </div>
+                    
+                    <div className="checkout-field field-has-label">
+                      <label>Full name</label>
+                      <input type="text" value={fullName || 'Afnan Khattak'} onChange={() => {}} />
+                    </div>
+
+                    <div className="checkout-field field-has-label">
+                      <label>Country or region</label>
+                      <select defaultValue="United Kingdom">
+                        <option>United Kingdom</option>
+                        <option>United States</option>
+                      </select>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a08b8c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="field-chevron"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+
+                    <div className="checkout-field">
+                      <input type="text" placeholder="Address line 1" />
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                renderPricingCards()
+              )}
             </div>
 
-            <button className="logout-btn" onClick={() => setIsLoggedIn(false)}>
+            <button className="logout-btn" onClick={() => { setIsLoggedIn(false); setCheckoutPlan(null); }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '6px'}}>
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                 <polyline points="16 17 21 12 16 7"></polyline>
