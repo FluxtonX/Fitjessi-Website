@@ -850,3 +850,131 @@ body {
 .autofill-btn svg {
   color: #00d084;
 }
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE DESIGN (Media Queries)
+   ═══════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .hero-model-img {
+    max-width: 80%;
+  }
+
+  .floating-badge {
+    transform: scale(0.85);
+  }
+  
+  .badge-left {
+    margin-left: -120px;
+  }
+  
+  .badge-right {
+    margin-left: 80px;
+  }
+
+  .plans-grid {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .plan-divider-wrap {
+    width: 100%;
+    height: 1px;
+    padding: 0;
+  }
+
+  .plan-divider {
+    width: 80%;
+    height: 1px;
+    margin: 0 auto;
+    background: linear-gradient(90deg, transparent, rgba(61, 44, 46, 0.15), transparent);
+  }
+
+  .plan-column {
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .plan-column.plan-free {
+    padding-right: 20px;
+  }
+
+  .plan-column.plan-premium {
+    padding-left: 20px;
+  }
+  
+  .plan-features {
+    align-items: center;
+  }
+
+  .dashboard-model .badge-left {
+    margin-left: -120px;
+  }
+
+  .dashboard-model .badge-right {
+    margin-left: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-model-img {
+    max-width: 100%;
+  }
+
+  .hero-model-card-bg {
+    width: 280px;
+    height: 400px;
+    bottom: -40px;
+  }
+
+  .floating-badge {
+    transform: scale(0.7);
+  }
+
+  .badge-left {
+    margin-left: -80px;
+    bottom: 80px;
+  }
+
+  .badge-right {
+    margin-left: 40px;
+    top: 60px;
+  }
+  
+  .dashboard-model .hero-model-img, 
+  .dashboard-model .hero-model-card-bg {
+    max-width: 260px;
+    height: 340px;
+  }
+
+  .dashboard-arch {
+    padding: 100px 20px 60px;
+    border-radius: 180px 180px 0 0;
+  }
+
+  .pricing-card-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .pricing-right {
+    text-align: left;
+    width: 100%;
+  }
+  
+  .checkout-top-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .checkout-close {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+}
