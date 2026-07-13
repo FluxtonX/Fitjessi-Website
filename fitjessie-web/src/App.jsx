@@ -92,6 +92,128 @@ function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [selectedPlan, setSelectedPlan] = useState('semi-annually');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleCreateAccount = (e) => {
+    e.preventDefault();
+    setIsLoggedIn(true);
+  };
+
+  const renderPricingCards = () => (
+    <div className="pricing-cards">
+      <label className={`pricing-card ${selectedPlan === 'monthly' ? 'selected' : ''}`} htmlFor="plan-monthly">
+        <input type="radio" id="plan-monthly" name="plan" value="monthly" checked={selectedPlan === 'monthly'} onChange={() => setSelectedPlan('monthly')} />
+        <div className="pricing-card-inner">
+          <div className="pricing-left">
+            <span className="pricing-label">MONTHLY</span>
+            <div className="pricing-amount">
+              <span className="price">$29.99</span>
+              <span className="per">/MONTH<br /><small>USD</small></span>
+            </div>
+          </div>
+          <div className="pricing-right">
+            <span className="pricing-detail">$29.99 usd<br />billed monthly</span>
+          </div>
+        </div>
+      </label>
+
+      <label className={`pricing-card highlighted ${selectedPlan === 'semi-annually' ? 'selected' : ''}`} htmlFor="plan-semi">
+        <input type="radio" id="plan-semi" name="plan" value="semi-annually" checked={selectedPlan === 'semi-annually'} onChange={() => setSelectedPlan('semi-annually')} />
+        <div className="pricing-card-inner">
+          <div className="pricing-left">
+            <span className="pricing-label">SEMI-ANNUALLY</span>
+            <span className="badge">MOST POPULAR <span className="badge-highlight">45% OFF</span></span>
+            <div className="pricing-amount">
+              <span className="price">$16.67</span>
+              <span className="per">/MONTH<br /><small>USD</small></span>
+            </div>
+          </div>
+          <div className="pricing-right">
+            <span className="pricing-detail"><s>$179.94 usd</s> $99.99 usd<br />billed semi-annually</span>
+          </div>
+        </div>
+      </label>
+
+      <label className={`pricing-card ${selectedPlan === 'annually' ? 'selected' : ''}`} htmlFor="plan-annual">
+        <input type="radio" id="plan-annual" name="plan" value="annually" checked={selectedPlan === 'annually'} onChange={() => setSelectedPlan('annually')} />
+        <div className="pricing-card-inner">
+          <div className="pricing-left">
+            <span className="pricing-label">ANNUALLY</span>
+            <span className="badge badge-value">BEST VALUE <span className="badge-highlight">58% OFF</span></span>
+            <div className="pricing-amount">
+              <span className="price">$12.50</span>
+              <span className="per">/MONTH<br /><small>USD</small></span>
+            </div>
+          </div>
+          <div className="pricing-right">
+            <span className="pricing-detail"><s>$359.88 usd</s> $149.99 usd<br />billed annually</span>
+          </div>
+        </div>
+      </label>
+
+      <label className={`pricing-card ${selectedPlan === 'lifetime' ? 'selected' : ''}`} htmlFor="plan-lifetime">
+        <input type="radio" id="plan-lifetime" name="plan" value="lifetime" checked={selectedPlan === 'lifetime'} onChange={() => setSelectedPlan('lifetime')} />
+        <div className="pricing-card-inner">
+          <div className="pricing-left">
+            <span className="pricing-label">LIFETIME</span>
+            <div className="pricing-amount">
+              <span className="price">$299.99</span>
+              <span className="per-inline">USD</span>
+            </div>
+          </div>
+          <div className="pricing-right">
+            <span className="pricing-detail">$299.99 usd<br />billed once</span>
+          </div>
+        </div>
+      </label>
+    </div>
+  );
+
+  if (isLoggedIn) {
+    return (
+      <div className="page-wrapper dashboard-page">
+        <WaveBackground />
+        <header className="hero-header">
+          <div className="logo-wrap">
+            <img src={logoImage} alt="FitJessie" className="logo-icon" />
+            <span className="logo-text">FITJESSIE</span>
+          </div>
+        </header>
+
+        <section className="dashboard-section">
+          {/* Model overlaps the arch */}
+          <div className="hero-model-wrap dashboard-model">
+            <div className="hero-model-card-bg"></div>
+            <img src={femaleModelImage2} alt="Fitness model" className="hero-model-img" />
+          </div>
+
+          <div className="dashboard-arch">
+            <h1 className="dashboard-greeting">HI,<br />{fullName.toUpperCase() || 'USER'}</h1>
+            <p className="dashboard-subtitle">Thank you for being a valued customer!</p>
+            
+            <p className="dashboard-subscribe-info">
+              <strong>Subscribe for full access</strong><br/>
+              Choose your plan. Automatically renews at the<br/>
+              end of subscription period. Cancel anytime.
+            </p>
+
+            <div className="dashboard-pricing-container">
+              {renderPricingCards()}
+            </div>
+
+            <button className="logout-btn" onClick={() => setIsLoggedIn(false)}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '6px'}}>
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+              Log out
+            </button>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="page-wrapper">
@@ -167,7 +289,7 @@ function App() {
             </p>
 
             {/* Sign Up Form */}
-            <form className="signup-form" onSubmit={(e) => e.preventDefault()}>
+            <form className="signup-form" onSubmit={handleCreateAccount}>
               <input
                 id="fullname-input"
                 type="text"
@@ -234,97 +356,7 @@ function App() {
             </p>
 
             {/* Pricing Cards */}
-            <div className="pricing-cards">
-              <label
-                className={`pricing-card ${selectedPlan === 'monthly' ? 'selected' : ''}`}
-                htmlFor="plan-monthly"
-              >
-                <input type="radio" id="plan-monthly" name="plan" value="monthly"
-                  checked={selectedPlan === 'monthly'}
-                  onChange={() => setSelectedPlan('monthly')}
-                />
-                <div className="pricing-card-inner">
-                  <div className="pricing-left">
-                    <span className="pricing-label">MONTHLY</span>
-                    <div className="pricing-amount">
-                      <span className="price">$29.99</span>
-                      <span className="per">/MONTH<br /><small>USD</small></span>
-                    </div>
-                  </div>
-                  <div className="pricing-right">
-                    <span className="pricing-detail">$29.99 usd<br />billed monthly</span>
-                  </div>
-                </div>
-              </label>
-
-              <label
-                className={`pricing-card highlighted ${selectedPlan === 'semi-annually' ? 'selected' : ''}`}
-                htmlFor="plan-semi"
-              >
-                <input type="radio" id="plan-semi" name="plan" value="semi-annually"
-                  checked={selectedPlan === 'semi-annually'}
-                  onChange={() => setSelectedPlan('semi-annually')}
-                />
-                <div className="pricing-card-inner">
-                  <div className="pricing-left">
-                    <span className="pricing-label">SEMI-ANNUALLY</span>
-                    <span className="badge">MOST POPULAR <span className="badge-highlight">45% OFF</span></span>
-                    <div className="pricing-amount">
-                      <span className="price">$16.67</span>
-                      <span className="per">/MONTH<br /><small>USD</small></span>
-                    </div>
-                  </div>
-                  <div className="pricing-right">
-                    <span className="pricing-detail"><s>$179.94 usd</s> $99.99 usd<br />billed semi-annually</span>
-                  </div>
-                </div>
-              </label>
-
-              <label
-                className={`pricing-card ${selectedPlan === 'annually' ? 'selected' : ''}`}
-                htmlFor="plan-annual"
-              >
-                <input type="radio" id="plan-annual" name="plan" value="annually"
-                  checked={selectedPlan === 'annually'}
-                  onChange={() => setSelectedPlan('annually')}
-                />
-                <div className="pricing-card-inner">
-                  <div className="pricing-left">
-                    <span className="pricing-label">ANNUALLY</span>
-                    <span className="badge badge-value">BEST VALUE <span className="badge-highlight">58% OFF</span></span>
-                    <div className="pricing-amount">
-                      <span className="price">$12.50</span>
-                      <span className="per">/MONTH<br /><small>USD</small></span>
-                    </div>
-                  </div>
-                  <div className="pricing-right">
-                    <span className="pricing-detail"><s>$359.88 usd</s> $149.99 usd<br />billed annually</span>
-                  </div>
-                </div>
-              </label>
-
-              <label
-                className={`pricing-card ${selectedPlan === 'lifetime' ? 'selected' : ''}`}
-                htmlFor="plan-lifetime"
-              >
-                <input type="radio" id="plan-lifetime" name="plan" value="lifetime"
-                  checked={selectedPlan === 'lifetime'}
-                  onChange={() => setSelectedPlan('lifetime')}
-                />
-                <div className="pricing-card-inner">
-                  <div className="pricing-left">
-                    <span className="pricing-label">LIFETIME</span>
-                    <div className="pricing-amount">
-                      <span className="price">$299.99</span>
-                      <span className="per-inline">USD</span>
-                    </div>
-                  </div>
-                  <div className="pricing-right">
-                    <span className="pricing-detail">$299.99 usd<br />billed once</span>
-                  </div>
-                </div>
-              </label>
-            </div>
+            {renderPricingCards()}
           </div>
         </div>
       </section>
