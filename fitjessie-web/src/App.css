@@ -20,13 +20,13 @@ body {
   font-family: 'Montserrat', sans-serif;
   background: linear-gradient(
     180deg,
-    #f0c5c6 0%,
-    #ecc0c0 30%,
-    #e4b5b6 60%,
-    #d9aaac 100%
+    #c2f2eb 0%,
+    #bdeee7 30%,
+    #b2e6df 60%,
+    #a7dbd4 100%
   );
   background-attachment: fixed; /* Keeps gradient smooth when scrolling */
-  color: #3d2c2e;
+  color: #2b3d3b;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   border: 12px solid #fff;
@@ -154,7 +154,7 @@ body {
   object-position: center 10%; /* Focus on the upper body/face */
   border-radius: 30px; /* Modern rounded rectangle */
   border: 6px solid rgba(255, 255, 255, 0.95); /* Elegant white frame */
-  box-shadow: 0 40px 80px rgba(61, 44, 46, 0.2); /* Deep, gorgeous shadow */
+  box-shadow: 0 40px 80px rgba(43, 61, 59, 0.2); /* Deep, gorgeous shadow */
   animation: modelFadeIn 1.2s ease-out forwards;
   opacity: 0;
   transform: translateY(20px) rotate(-1.5deg); /* Playful tilt */
@@ -168,7 +168,7 @@ body {
 /* Magical Hover Interactions */
 .hero-model-wrap:hover .hero-model-img {
   transform: translateY(0) rotate(0) scale(1.02);
-  box-shadow: 0 50px 100px rgba(61, 44, 46, 0.3);
+  box-shadow: 0 50px 100px rgba(43, 61, 59, 0.3);
 }
 
 .hero-model-wrap:hover .hero-model-card-bg {
@@ -188,7 +188,7 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  box-shadow: 0 15px 35px rgba(61, 44, 46, 0.1);
+  box-shadow: 0 15px 35px rgba(43, 61, 59, 0.1);
   z-index: 30;
   animation: floatUp 6s ease-in-out infinite;
 }
@@ -204,14 +204,14 @@ body {
 }
 
 .floating-badge .badge-text strong {
-  color: #3d2c2e;
+  color: #2b3d3b;
   font-size: 16px;
   font-weight: 700;
   line-height: 1.1;
 }
 
 .floating-badge .badge-text span {
-  color: #6a5355;
+  color: #516b67;
   font-size: 11px;
   font-weight: 500;
   text-transform: uppercase;
@@ -257,9 +257,9 @@ body {
   border-radius: 640px 640px 0 0; /* Half of max-width */
   background: linear-gradient(
     180deg,
-    #c9a0a3 0%,
-    #c49a9d 30%,
-    #c29698 100%
+    #9dcbc4 0%,
+    #97c6bf 30%,
+    #93c4bd 100%
   );
   padding: 240px 40px 80px; /* Increased top padding so content fits inside the huge arch */
 }
@@ -282,7 +282,7 @@ body {
 .plan-divider {
   width: 1px;
   height: 200px; /* Only tall enough to separate the text features */
-  background: rgba(60, 40, 42, 0.2);
+  background: rgba(39, 60, 57, 0.2);
   margin: 0 40px;
 }
 
@@ -299,7 +299,7 @@ body {
   font-weight: 200; /* Ultra thin, elegant weight to match Boston Light */
   letter-spacing: 4px;
   line-height: 1.3;
-  color: #3d2c2e;
+  color: #2b3d3b;
   margin-bottom: 32px;
   text-transform: uppercase;
 }
@@ -308,7 +308,7 @@ body {
 .plan-icons {
   display: flex;
   gap: 18px;
-  color: #3d2c2e;
+  color: #2b3d3b;
   margin-bottom: 32px;
 }
 
@@ -331,26 +331,26 @@ body {
 .feature-item strong {
   font-size: 18px;
   font-weight: 700;
-  color: #3d2c2e;
+  color: #2b3d3b;
 }
 
 .feature-item span {
   font-size: 14px;
   font-weight: 400;
-  color: #5a4345;
+  color: #415b57;
   max-width: 140px;
 }
 
 /* ── CTA Text ── */
 .plan-cta-text {
   font-size: 14px;
-  color: #5a4345;
+  color: #415b57;
   line-height: 1.6;
   margin-bottom: 30px;
 }
 
 .link-underline {
-  color: #3d2c2e;
+  color: #2b3d3b;
   text-decoration: underline;
   font-weight: 500;
   transition: opacity 0.2s;
@@ -380,30 +380,30 @@ body {
   border: none;
   border-radius: 8px; /* Rounded corners for all inputs */
   background: #fff;
-  color: #3d2c2e;
+  color: #2b3d3b;
   outline: none;
   transition: box-shadow 0.2s;
 }
 
 .signup-form input::placeholder {
-  color: #a08a8c;
+  color: #88a19d;
   font-weight: 400;
 }
 
 .signup-form input:focus {
-  box-shadow: inset 0 0 0 2px rgba(180, 100, 110, 0.3);
+  box-shadow: inset 0 0 0 2px rgba(96, 184, 171, 0.3);
 }
 
 .form-hint {
   font-size: 13px;
-  color: #6a5355;
+  color: #516b67;
   margin: 4px 0 16px; /* Closer to password, more space above button */
   text-align: center;
 }
 
 .form-terms {
   font-size: 13px;
-  color: #6a5355;
+  color: #516b67;
   margin-top: 16px;
   text-align: center;
 }
@@ -470,8 +470,8 @@ body {
 }
 
 .pricing-card.selected {
-  border-color: #c47a3a;
-  box-shadow: 0 4px 20px rgba(196, 122, 58, 0.15);
+  border-color: #33cab5;
+  box-shadow: 0 4px 20px rgba(51, 202, 181, 0.15);
 }
 
 .pricing-card-inner {
@@ -493,7 +493,7 @@ body {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 3px;
-  color: #ea6c4d; /* Matched the distinct orange color */
+  color: #45f1da; /* Matched the distinct orange color */
   text-transform: uppercase;
   margin-bottom: 8px;
 }
@@ -514,7 +514,7 @@ body {
 }
 
 .badge-highlight {
-  color: #ea6c4d; /* Matches the coral color of the labels */
+  color: #45f1da; /* Matches the coral color of the labels */
 }
 
 .badge-value {
@@ -538,32 +538,32 @@ body {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 1px;
-  color: #3d2c2e;
+  color: #2b3d3b;
   line-height: 1.3;
 }
 
 .per small {
   font-weight: 700;
   letter-spacing: 2px;
-  color: #9cb1b5; /* Light blue-grey tint for USD */
+  color: #9ab6b2; /* Light blue-grey tint for USD */
 }
 
 .per-inline {
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 2px;
-  color: #9cb1b5; /* Light blue-grey tint for USD */
+  color: #9ab6b2; /* Light blue-grey tint for USD */
   margin-left: 8px;
 }
 
 .pricing-detail {
   font-size: 13px;
-  color: #7a6365;
+  color: #617b77;
   line-height: 1.5;
 }
 
 .pricing-detail s {
-  color: #a0898b;
+  color: #87a19d;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -654,7 +654,7 @@ body {
 .dashboard-arch {
   width: 100%;
   max-width: 500px;
-  background: rgba(220, 192, 193, 0.45); /* slightly darker/more opaque arch */
+  background: rgba(190, 221, 217, 0.45); /* slightly darker/more opaque arch */
   border-radius: 250px 250px 0 0;
   padding: 130px 40px 80px;
   display: flex;
@@ -670,7 +670,7 @@ body {
   font-weight: 300;
   font-size: 26px;
   letter-spacing: 4px;
-  color: #3d2c2e;
+  color: #2b3d3b;
   line-height: 1.4;
   margin-bottom: 12px;
 }
@@ -678,14 +678,14 @@ body {
 .dashboard-subtitle {
   font-size: 13px;
   font-weight: 500;
-  color: #3d2c2e;
+  color: #2b3d3b;
   margin-bottom: 40px;
 }
 
 .dashboard-subscribe-info {
   font-size: 12px;
   line-height: 1.6;
-  color: #3d2c2e;
+  color: #2b3d3b;
   margin-bottom: 24px;
 }
 
@@ -709,7 +709,7 @@ body {
   margin-top: 40px;
   background: transparent;
   border: none;
-  color: #3d2c2e;
+  color: #2b3d3b;
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
@@ -748,14 +748,14 @@ body {
   background: #fff;
   border-radius: 24px;
   padding: 16px;
-  box-shadow: 0 10px 30px rgba(61, 44, 46, 0.08);
+  box-shadow: 0 10px 30px rgba(43, 61, 59, 0.08);
 }
 
 .checkout-close {
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #3d2c2e;
+  color: #2b3d3b;
   padding: 8px;
   display: flex;
   align-items: center;
@@ -772,7 +772,7 @@ body {
 .checkout-subtitle {
   text-align: center;
   font-size: 15px;
-  color: #3d2c2e;
+  color: #2b3d3b;
   margin-bottom: 24px;
 }
 
@@ -789,7 +789,7 @@ body {
   display: flex;
   align-items: center;
   position: relative;
-  box-shadow: 0 4px 12px rgba(61, 44, 46, 0.04);
+  box-shadow: 0 4px 12px rgba(43, 61, 59, 0.04);
 }
 
 .checkout-field input,
@@ -799,13 +799,13 @@ body {
   background: transparent;
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
-  color: #3d2c2e;
+  color: #2b3d3b;
   outline: none;
   appearance: none;
 }
 
 .checkout-field input::placeholder {
-  color: #a08b8c;
+  color: #89a19d;
 }
 
 .field-has-label {
@@ -816,7 +816,7 @@ body {
 
 .field-has-label label {
   font-size: 12px;
-  color: #a08b8c;
+  color: #89a19d;
   margin-bottom: 4px;
 }
 
@@ -834,7 +834,7 @@ body {
 }
 
 .autofill-btn {
-  background: #002e1a;
+  background: #002e27;
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -848,7 +848,7 @@ body {
 }
 
 .autofill-btn svg {
-  color: #00d084;
+  color: #00d0b3;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -887,7 +887,7 @@ body {
     width: 80%;
     height: 1px;
     margin: 0 auto;
-    background: linear-gradient(90deg, transparent, rgba(61, 44, 46, 0.15), transparent);
+    background: linear-gradient(90deg, transparent, rgba(43, 61, 59, 0.15), transparent);
   }
 
   .plan-column {
